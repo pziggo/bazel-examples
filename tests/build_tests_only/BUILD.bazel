@@ -1,0 +1,19 @@
+cc_library(
+    name = "hello_lib",
+    srcs = ["hello_lib.cc"],
+    hdrs = ["hello_lib.h"],
+)
+
+cc_binary(
+    name = "hello_world",
+    srcs = ["hello_world.cc"],
+    visibility = ["//visibility:public"],
+    deps = [":hello_lib"],
+)
+
+cc_test(
+    name = "hello_lib_test",
+    srcs = ["hello_lib_test.cc"],
+    deps = [":hello_lib"],
+    size = "small",
+)
