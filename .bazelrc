@@ -1,0 +1,12 @@
+build --incompatible_strict_action_env
+
+# Protect against modifications of files during builds.
+build --experimental_guard_against_concurrent_changes=true
+
+build --verbose_failures
+test --test_output=errors
+
+#
+# User config.
+#
+try-import .bazelrc.user
