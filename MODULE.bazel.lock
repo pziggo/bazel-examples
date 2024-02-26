@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "a1e5043f6ca476efa372fa313e3973afc7e978fedc657c50e154d508591c9ac9",
+  "moduleFileHash": "d1d1eedbde6e76876aa6405a54e9946912a9a05431213be85729ababfa85ee8d",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -22,14 +22,7 @@
       "key": "<root>",
       "repoName": "",
       "executionPlatformsToRegister": [],
-      "toolchainsToRegister": [
-        "@zig_sdk//toolchain:linux_amd64_gnu.2.31",
-        "@zig_sdk//toolchain:linux_arm64_gnu.2.31",
-        "@zig_sdk//toolchain:darwin_amd64",
-        "@zig_sdk//toolchain:darwin_arm64",
-        "@zig_sdk//toolchain:windows_amd64",
-        "@zig_sdk//toolchain:windows_arm64"
-      ],
+      "toolchainsToRegister": [],
       "extensionUsages": [
         {
           "extensionBzlFile": "@rules_python//python/extensions:python.bzl",
@@ -94,28 +87,75 @@
           "hasNonDevUseExtension": true
         },
         {
-          "extensionBzlFile": "@hermetic_cc_toolchain//toolchain:ext.bzl",
-          "extensionName": "toolchains",
+          "extensionBzlFile": "@rules_nodejs//nodejs:extensions.bzl",
+          "extensionName": "node",
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 28,
-            "column": 27
+            "line": 29,
+            "column": 21
           },
-          "imports": {
-            "zig_sdk": "zig_sdk"
-          },
+          "imports": {},
           "devImports": [],
-          "tags": [],
+          "tags": [
+            {
+              "tagName": "toolchain",
+              "attributeValues": {
+                "node_version": "16.14.2"
+              },
+              "devDependency": false,
+              "location": {
+                "file": "@@//:MODULE.bazel",
+                "line": 30,
+                "column": 15
+              }
+            }
+          ],
           "hasDevUseExtension": false,
           "hasNonDevUseExtension": true
+        },
+        {
+          "extensionBzlFile": "@aspect_rules_js//npm:extensions.bzl",
+          "extensionName": "npm",
+          "usingModule": "<root>",
+          "location": {
+            "file": "@@//:MODULE.bazel",
+            "line": 32,
+            "column": 20
+          },
+          "imports": {
+            "npm": "npm"
+          },
+          "devImports": [
+            "npm"
+          ],
+          "tags": [
+            {
+              "tagName": "npm_translate_lock",
+              "attributeValues": {
+                "name": "npm",
+                "pnpm_lock": "//:pnpm-lock.yaml",
+                "verify_node_modules_ignored": "//:.bazelignore"
+              },
+              "devDependency": true,
+              "location": {
+                "file": "@@//:MODULE.bazel",
+                "line": 34,
+                "column": 23
+              }
+            }
+          ],
+          "hasDevUseExtension": true,
+          "hasNonDevUseExtension": false
         }
       ],
       "deps": {
         "bazel_gazelle": "gazelle@0.34.0",
         "rules_python": "rules_python@0.27.0",
         "rules_python_gazelle_plugin": "rules_python_gazelle_plugin@0.27.0",
-        "hermetic_cc_toolchain": "hermetic_cc_toolchain@2.1.2",
+        "aspect_rules_js": "aspect_rules_js@1.38.0",
+        "rules_nodejs": "rules_nodejs@6.0.3",
+        "aspect_rules_esbuild": "aspect_rules_esbuild@0.18.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       }
@@ -219,7 +259,7 @@
         }
       ],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "com_google_protobuf": "protobuf@21.7",
         "io_bazel_rules_go": "rules_go@0.42.0",
         "rules_proto": "rules_proto@5.3.0-21.7",
@@ -328,8 +368,8 @@
       ],
       "deps": {
         "bazel_features": "bazel_features@1.1.1",
-        "bazel_skylib": "bazel_skylib@1.3.0",
-        "platforms": "platforms@0.0.7",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
         "rules_proto": "rules_proto@5.3.0-21.7",
         "com_google_protobuf": "protobuf@21.7",
         "bazel_tools": "bazel_tools@_",
@@ -419,16 +459,102 @@
         }
       }
     },
-    "hermetic_cc_toolchain@2.1.2": {
-      "name": "hermetic_cc_toolchain",
-      "version": "2.1.2",
-      "key": "hermetic_cc_toolchain@2.1.2",
-      "repoName": "hermetic_cc_toolchain",
+    "aspect_rules_js@1.38.0": {
+      "name": "aspect_rules_js",
+      "version": "1.38.0",
+      "key": "aspect_rules_js@1.38.0",
+      "repoName": "aspect_rules_js",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [],
-      "extensionUsages": [],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@rules_nodejs//nodejs:extensions.bzl",
+          "extensionName": "node",
+          "usingModule": "aspect_rules_js@1.38.0",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/aspect_rules_js/1.38.0/MODULE.bazel",
+            "line": 18,
+            "column": 21
+          },
+          "imports": {
+            "nodejs_darwin_amd64": "nodejs_darwin_amd64",
+            "nodejs_darwin_arm64": "nodejs_darwin_arm64",
+            "nodejs_linux_amd64": "nodejs_linux_amd64",
+            "nodejs_linux_arm64": "nodejs_linux_arm64",
+            "nodejs_linux_ppc64le": "nodejs_linux_ppc64le",
+            "nodejs_linux_s390x": "nodejs_linux_s390x",
+            "nodejs_windows_amd64": "nodejs_windows_amd64"
+          },
+          "devImports": [],
+          "tags": [],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        },
+        {
+          "extensionBzlFile": "@aspect_rules_js//npm:extensions.bzl",
+          "extensionName": "pnpm",
+          "usingModule": "aspect_rules_js@1.38.0",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/aspect_rules_js/1.38.0/MODULE.bazel",
+            "line": 27,
+            "column": 21
+          },
+          "imports": {
+            "pnpm": "pnpm",
+            "pnpm__links": "pnpm__links"
+          },
+          "devImports": [],
+          "tags": [
+            {
+              "tagName": "pnpm",
+              "attributeValues": {
+                "name": "pnpm",
+                "pnpm_version": "8.6.7",
+                "pnpm_version_integrity": "sha512-vRIWpD/L4phf9Bk2o/O2TDR8fFoJnpYrp2TKqTIZF/qZ2/rgL3qKXzHofHgbXsinwMoSEigz28sqk3pQ+yMEQQ=="
+              },
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_rules_js/1.38.0/MODULE.bazel",
+                "line": 28,
+                "column": 10
+              }
+            }
+          ],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        },
+        {
+          "extensionBzlFile": "@aspect_bazel_lib//lib:extensions.bzl",
+          "extensionName": "toolchains",
+          "usingModule": "aspect_rules_js@1.38.0",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/aspect_rules_js/1.38.0/MODULE.bazel",
+            "line": 35,
+            "column": 37
+          },
+          "imports": {
+            "coreutils_toolchains": "coreutils_toolchains",
+            "yq_darwin_amd64": "yq_darwin_amd64",
+            "yq_darwin_arm64": "yq_darwin_arm64",
+            "yq_linux_amd64": "yq_linux_amd64",
+            "yq_linux_arm64": "yq_linux_arm64",
+            "yq_linux_ppc64le": "yq_linux_ppc64le",
+            "yq_linux_s390x": "yq_linux_s390x",
+            "yq_windows_amd64": "yq_windows_amd64"
+          },
+          "devImports": [],
+          "tags": [],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
       "deps": {
-        "platforms": "platforms@0.0.7",
+        "aspect_bazel_lib": "aspect_bazel_lib@1.40.0",
+        "aspect_rules_lint": "aspect_rules_lint@0.9.1",
+        "bazel_features": "bazel_features@1.1.1",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "rules_nodejs": "rules_nodejs@6.0.3",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -436,14 +562,148 @@
         "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
         "ruleClassName": "http_archive",
         "attributes": {
-          "name": "hermetic_cc_toolchain~2.1.2",
+          "name": "aspect_rules_js~1.38.0",
           "urls": [
-            "https://github.com/uber/hermetic_cc_toolchain/releases/download/v2.1.2/hermetic_cc_toolchain-v2.1.2.tar.gz"
+            "https://github.com/aspect-build/rules_js/releases/download/v1.38.0/rules_js-v1.38.0.tar.gz"
           ],
-          "integrity": "sha256-KPxxubMZHDEu6D+qHcZbOOtww6V3QDaPfnx6Sb7fMQY=",
-          "strip_prefix": "",
-          "remote_patches": {},
-          "remote_patch_strip": 0
+          "integrity": "sha256-7cewJVEU+v271ZPqXV/f1UsqYD8zs6SVGJEKxhjhvys=",
+          "strip_prefix": "rules_js-1.38.0",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/aspect_rules_js/1.38.0/patches/module_dot_bazel_version.patch": "sha256-tAqZRfOXAplJDTwXVfUiYwinz9Iqug7CeU2aJH0+IqU="
+          },
+          "remote_patch_strip": 1
+        }
+      }
+    },
+    "rules_nodejs@6.0.3": {
+      "name": "rules_nodejs",
+      "version": "6.0.3",
+      "key": "rules_nodejs@6.0.3",
+      "repoName": "rules_nodejs",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [
+        "@nodejs_toolchains//:all"
+      ],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@rules_nodejs//nodejs:extensions.bzl",
+          "extensionName": "node",
+          "usingModule": "rules_nodejs@6.0.3",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/rules_nodejs/6.0.3/MODULE.bazel",
+            "line": 12,
+            "column": 21
+          },
+          "imports": {
+            "nodejs_toolchains": "nodejs_toolchains"
+          },
+          "devImports": [],
+          "tags": [
+            {
+              "tagName": "toolchain",
+              "attributeValues": {
+                "name": "nodejs"
+              },
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/rules_nodejs/6.0.3/MODULE.bazel",
+                "line": 16,
+                "column": 15
+              }
+            }
+          ],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
+      "deps": {
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "name": "rules_nodejs~6.0.3",
+          "urls": [
+            "https://github.com/bazelbuild/rules_nodejs/releases/download/v6.0.3/rules_nodejs-v6.0.3.tar.gz"
+          ],
+          "integrity": "sha256-825KR0chAzF2cDPcMHKK498IVuiOz9xIoAd7qHTbFsM=",
+          "strip_prefix": "rules_nodejs-6.0.3",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/rules_nodejs/6.0.3/patches/module_dot_bazel_version.patch": "sha256-/Qzzf6CPPzlexZh3ZFFqSthBDeYANhTOf7FB76Y3Aq4="
+          },
+          "remote_patch_strip": 1
+        }
+      }
+    },
+    "aspect_rules_esbuild@0.18.0": {
+      "name": "aspect_rules_esbuild",
+      "version": "0.18.0",
+      "key": "aspect_rules_esbuild@0.18.0",
+      "repoName": "aspect_rules_esbuild",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [
+        "@esbuild_toolchains//:all"
+      ],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@aspect_rules_esbuild//esbuild:extensions.bzl",
+          "extensionName": "esbuild",
+          "usingModule": "aspect_rules_esbuild@0.18.0",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/aspect_rules_esbuild/0.18.0/MODULE.bazel",
+            "line": 15,
+            "column": 24
+          },
+          "imports": {
+            "esbuild_toolchains": "esbuild_toolchains"
+          },
+          "devImports": [],
+          "tags": [
+            {
+              "tagName": "toolchain",
+              "attributeValues": {
+                "name": "esbuild",
+                "esbuild_version": "0.19.9"
+              },
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_rules_esbuild/0.18.0/MODULE.bazel",
+                "line": 16,
+                "column": 18
+              }
+            }
+          ],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
+      "deps": {
+        "aspect_bazel_lib": "aspect_bazel_lib@1.40.0",
+        "aspect_rules_js": "aspect_rules_js@1.38.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
+        "rules_nodejs": "rules_nodejs@6.0.3",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "name": "aspect_rules_esbuild~0.18.0",
+          "urls": [
+            "https://github.com/aspect-build/rules_esbuild/releases/download/v0.18.0/rules_esbuild-v0.18.0.tar.gz"
+          ],
+          "integrity": "sha256-mZNJr+9ih1MB9F7IUVGJzq8uhbHmehfi0ouVsw4dbAs=",
+          "strip_prefix": "rules_esbuild-0.18.0",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/aspect_rules_esbuild/0.18.0/patches/module_dot_bazel_version.patch": "sha256-Wz6xw8tnkUye3sqiikJqpDiBniW+HLds19pR27p/oY4="
+          },
+          "remote_patch_strip": 1
         }
       }
     },
@@ -574,7 +834,7 @@
         "rules_license": "rules_license@0.0.7",
         "rules_proto": "rules_proto@5.3.0-21.7",
         "rules_python": "rules_python@0.27.0",
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "com_google_protobuf": "protobuf@21.7",
         "zlib": "zlib@1.3",
         "build_bazel_apple_support": "apple_support@1.5.0",
@@ -590,14 +850,14 @@
       "toolchainsToRegister": [],
       "extensionUsages": [],
       "deps": {
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_"
       }
     },
-    "bazel_skylib@1.3.0": {
+    "bazel_skylib@1.5.0": {
       "name": "bazel_skylib",
-      "version": "1.3.0",
-      "key": "bazel_skylib@1.3.0",
+      "version": "1.5.0",
+      "key": "bazel_skylib@1.5.0",
       "repoName": "bazel_skylib",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [
@@ -606,7 +866,7 @@
       ],
       "extensionUsages": [],
       "deps": {
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -614,11 +874,11 @@
         "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
         "ruleClassName": "http_archive",
         "attributes": {
-          "name": "bazel_skylib~1.3.0",
+          "name": "bazel_skylib~1.5.0",
           "urls": [
-            "https://github.com/bazelbuild/bazel-skylib/releases/download/1.3.0/bazel-skylib-1.3.0.tar.gz"
+            "https://github.com/bazelbuild/bazel-skylib/releases/download/1.5.0/bazel-skylib-1.5.0.tar.gz"
           ],
-          "integrity": "sha256-dNVE2W9KW7Yw1GXKi7z+Ix41lOWq5X4e2/F6brPKJQY=",
+          "integrity": "sha256-zVWgYudjuTSZIfD124w5MyiNyLpPdt2UFqrGis7jy5Q=",
           "strip_prefix": "",
           "remote_patches": {},
           "remote_patch_strip": 0
@@ -676,7 +936,7 @@
         }
       ],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "rules_python": "rules_python@0.27.0",
         "rules_cc": "rules_cc@0.0.9",
         "rules_proto": "rules_proto@5.3.0-21.7",
@@ -821,8 +1081,8 @@
       ],
       "deps": {
         "bazel_features": "bazel_features@1.1.1",
-        "bazel_skylib": "bazel_skylib@1.3.0",
-        "platforms": "platforms@0.0.7",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
         "rules_proto": "rules_proto@5.3.0-21.7",
         "com_google_protobuf": "protobuf@21.7",
         "gazelle": "gazelle@0.34.0",
@@ -853,7 +1113,7 @@
       "toolchainsToRegister": [],
       "extensionUsages": [],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "com_google_protobuf": "protobuf@21.7",
         "rules_cc": "rules_cc@0.0.9",
         "bazel_tools": "bazel_tools@_",
@@ -922,10 +1182,10 @@
         }
       }
     },
-    "platforms@0.0.7": {
+    "platforms@0.0.8": {
       "name": "platforms",
-      "version": "0.0.7",
-      "key": "platforms@0.0.7",
+      "version": "0.0.8",
+      "key": "platforms@0.0.8",
       "repoName": "platforms",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [],
@@ -941,12 +1201,173 @@
         "attributes": {
           "name": "platforms",
           "urls": [
-            "https://github.com/bazelbuild/platforms/releases/download/0.0.7/platforms-0.0.7.tar.gz"
+            "https://github.com/bazelbuild/platforms/releases/download/0.0.8/platforms-0.0.8.tar.gz"
           ],
-          "integrity": "sha256-OlYcmee9vpFzqmU/1Xn+hJ8djWc5V4CrR3Cx84FDHVE=",
+          "integrity": "sha256-gVBAZgU4ns7LbaB8vLUJ1WN6OrmiS8abEQFTE2fYnXQ=",
           "strip_prefix": "",
           "remote_patches": {},
           "remote_patch_strip": 0
+        }
+      }
+    },
+    "aspect_bazel_lib@1.40.0": {
+      "name": "aspect_bazel_lib",
+      "version": "1.40.0",
+      "key": "aspect_bazel_lib@1.40.0",
+      "repoName": "aspect_bazel_lib",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [
+        "@copy_directory_toolchains//:all",
+        "@copy_to_directory_toolchains//:all",
+        "@jq_toolchains//:all",
+        "@yq_toolchains//:all",
+        "@coreutils_toolchains//:all",
+        "@expand_template_toolchains//:all"
+      ],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@aspect_bazel_lib//lib:extensions.bzl",
+          "extensionName": "toolchains",
+          "usingModule": "aspect_bazel_lib@1.40.0",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+            "line": 16,
+            "column": 37
+          },
+          "imports": {
+            "copy_directory_toolchains": "copy_directory_toolchains",
+            "copy_to_directory_toolchains": "copy_to_directory_toolchains",
+            "coreutils_toolchains": "coreutils_toolchains",
+            "expand_template_toolchains": "expand_template_toolchains",
+            "jq_toolchains": "jq_toolchains",
+            "yq_toolchains": "yq_toolchains"
+          },
+          "devImports": [],
+          "tags": [
+            {
+              "tagName": "copy_directory",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+                "line": 17,
+                "column": 36
+              }
+            },
+            {
+              "tagName": "copy_to_directory",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+                "line": 18,
+                "column": 39
+              }
+            },
+            {
+              "tagName": "jq",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+                "line": 19,
+                "column": 24
+              }
+            },
+            {
+              "tagName": "yq",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+                "line": 20,
+                "column": 24
+              }
+            },
+            {
+              "tagName": "coreutils",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+                "line": 21,
+                "column": 31
+              }
+            },
+            {
+              "tagName": "expand_template",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/MODULE.bazel",
+                "line": 22,
+                "column": 37
+              }
+            }
+          ],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
+      "deps": {
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
+        "io_bazel_stardoc": "stardoc@0.5.4",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "name": "aspect_bazel_lib~1.40.0",
+          "urls": [
+            "https://github.com/aspect-build/bazel-lib/releases/download/v1.40.0/bazel-lib-v1.40.0.tar.gz"
+          ],
+          "integrity": "sha256-9u9ohx0gbPj19O6oPSajZlY6YxsCCv4dovg4qb/wNcA=",
+          "strip_prefix": "bazel-lib-1.40.0",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/patches/go_dev_dep.patch": "sha256-dEFxvx2hBB/tOWlknfRHRXNCdvYpvrxsYHWaMGF2QgA=",
+            "https://bcr.bazel.build/modules/aspect_bazel_lib/1.40.0/patches/module_dot_bazel_version.patch": "sha256-iObeu/lM6rlMBoGfku1ghjqdsCvdpgqFUyfQaqjeZKY="
+          },
+          "remote_patch_strip": 1
+        }
+      }
+    },
+    "aspect_rules_lint@0.9.1": {
+      "name": "aspect_rules_lint",
+      "version": "0.9.1",
+      "key": "aspect_rules_lint@0.9.1",
+      "repoName": "aspect_rules_lint",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [],
+      "extensionUsages": [],
+      "deps": {
+        "aspect_bazel_lib": "aspect_bazel_lib@1.40.0",
+        "aspect_rules_js": "aspect_rules_js@1.38.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
+        "rules_proto": "rules_proto@5.3.0-21.7",
+        "rules_buf": "rules_buf@0.1.1",
+        "com_google_protobuf": "protobuf@21.7",
+        "io_bazel_rules_go": "rules_go@0.42.0",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "name": "aspect_rules_lint~0.9.1",
+          "urls": [
+            "https://github.com/aspect-build/rules_lint/releases/download/v0.9.1/rules_lint-v0.9.1.tar.gz"
+          ],
+          "integrity": "sha256-KNMZM5t6TnCwNkKxnb1dql8a5GHhxQcG4CEQx4+FATc=",
+          "strip_prefix": "rules_lint-0.9.1",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/aspect_rules_lint/0.9.1/patches/module_dot_bazel_version.patch": "sha256-a8WPWh4vlmM5CcOFvLev7UKmv3I+3O9HCm7Mq3aWnrA="
+          },
+          "remote_patch_strip": 1
         }
       }
     },
@@ -979,7 +1400,7 @@
         }
       ],
       "deps": {
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -1078,9 +1499,9 @@
         }
       ],
       "deps": {
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "rules_cc": "rules_cc@0.0.9",
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "rules_proto": "rules_proto@5.3.0-21.7",
         "rules_license": "rules_license@0.0.7",
         "bazel_tools": "bazel_tools@_",
@@ -1137,7 +1558,7 @@
       "toolchainsToRegister": [],
       "extensionUsages": [],
       "deps": {
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "rules_cc": "rules_cc@0.0.9",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
@@ -1190,8 +1611,8 @@
         }
       ],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
-        "platforms": "platforms@0.0.7",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -1220,7 +1641,7 @@
       "extensionUsages": [],
       "deps": {
         "rules_python": "rules_python@0.27.0",
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "rules_license": "rules_license@0.0.7",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
@@ -1252,7 +1673,7 @@
       "extensionUsages": [],
       "deps": {
         "rules_cc": "rules_cc@0.0.9",
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -1282,11 +1703,11 @@
       "toolchainsToRegister": [],
       "extensionUsages": [],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "rules_proto": "rules_proto@5.3.0-21.7",
         "com_google_protobuf": "protobuf@21.7",
         "com_google_absl": "abseil-cpp@20211102.0",
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -1372,8 +1793,8 @@
         }
       ],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
-        "io_bazel_stardoc": "stardoc@0.5.1",
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "io_bazel_stardoc": "stardoc@0.5.4",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -1402,7 +1823,7 @@
       "extensionUsages": [],
       "deps": {
         "com_google_absl": "abseil-cpp@20211102.0",
-        "platforms": "platforms@0.0.7",
+        "platforms": "platforms@0.0.8",
         "rules_cc": "rules_cc@0.0.9",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
@@ -1424,17 +1845,18 @@
         }
       }
     },
-    "stardoc@0.5.1": {
+    "stardoc@0.5.4": {
       "name": "stardoc",
-      "version": "0.5.1",
-      "key": "stardoc@0.5.1",
+      "version": "0.5.4",
+      "key": "stardoc@0.5.4",
       "repoName": "stardoc",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [],
       "extensionUsages": [],
       "deps": {
-        "bazel_skylib": "bazel_skylib@1.3.0",
+        "bazel_skylib": "bazel_skylib@1.5.0",
         "rules_java": "rules_java@7.1.0",
+        "rules_license": "rules_license@0.0.7",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       },
@@ -1442,16 +1864,66 @@
         "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
         "ruleClassName": "http_archive",
         "attributes": {
-          "name": "stardoc~0.5.1",
+          "name": "stardoc~0.5.4",
           "urls": [
-            "https://github.com/bazelbuild/stardoc/releases/download/0.5.1/stardoc-0.5.1.tar.gz"
+            "https://github.com/bazelbuild/stardoc/releases/download/0.5.4/stardoc-0.5.4.tar.gz"
           ],
-          "integrity": "sha256-qoFNrgrEALurLoiB+ZFcb0fElmS/CHxAmhX5BDjSwj4=",
+          "integrity": "sha256-7FcTnkZvquVj8vw5YJ2klIpHm7UbbWeu3X2bG4BZxDM=",
           "strip_prefix": "",
-          "remote_patches": {
-            "https://bcr.bazel.build/modules/stardoc/0.5.1/patches/module_dot_bazel.patch": "sha256-UAULCuTpJE7SG0YrR9XLjMfxMRmbP+za3uW9ONZ5rjI="
-          },
+          "remote_patches": {},
           "remote_patch_strip": 0
+        }
+      }
+    },
+    "rules_buf@0.1.1": {
+      "name": "rules_buf",
+      "version": "0.1.1",
+      "key": "rules_buf@0.1.1",
+      "repoName": "rules_buf",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [
+        "@rules_buf_toolchains//:all"
+      ],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@rules_buf//buf:extensions.bzl",
+          "extensionName": "ext",
+          "usingModule": "rules_buf@0.1.1",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/rules_buf/0.1.1/MODULE.bazel",
+            "line": 14,
+            "column": 20
+          },
+          "imports": {
+            "rules_buf_toolchains": "rules_buf_toolchains"
+          },
+          "devImports": [],
+          "tags": [],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
+      "deps": {
+        "platforms": "platforms@0.0.8",
+        "com_google_protobuf": "protobuf@21.7",
+        "rules_proto": "rules_proto@5.3.0-21.7",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "name": "rules_buf~0.1.1",
+          "urls": [
+            "https://github.com/bufbuild/rules_buf/archive/abbbfce7c3fccf1d4b87afa28140d9ce53f80057.zip"
+          ],
+          "integrity": "sha256-/cvkfvtor1wk3+dSdJqwsqDBrAIV49KM9unuKODCrvs=",
+          "strip_prefix": "rules_buf-abbbfce7c3fccf1d4b87afa28140d9ce53f80057",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/rules_buf/0.1.1/patches/bzlmod.patch": "sha256-D5PYozjx10XcIqo0mMyoGIqO3PJHJtxLQ1vo3zesDS0="
+          },
+          "remote_patch_strip": 1
         }
       }
     }
@@ -1477,7 +1949,3568 @@
               "name": "apple_support~1.5.0~apple_cc_configure_extension~local_config_apple_cc_toolchains"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
+      }
+    },
+    "@@aspect_bazel_lib~1.40.0//lib:extensions.bzl%toolchains": {
+      "general": {
+        "bzlTransitiveDigest": "WrnU5P/TrLAVcNuowCXydKMkEqFhUIeblx2avFP8ObY=",
+        "accumulatedFileDigests": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "expand_template_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_windows_amd64",
+              "platform": "windows_amd64"
+            }
+          },
+          "copy_to_directory_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_windows_amd64",
+              "platform": "windows_amd64"
+            }
+          },
+          "jq": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_host_alias_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~jq"
+            }
+          },
+          "jq_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~jq_darwin_amd64",
+              "platform": "darwin_amd64",
+              "version": "1.6"
+            }
+          },
+          "expand_template_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_darwin_arm64",
+              "platform": "darwin_arm64"
+            }
+          },
+          "copy_to_directory_freebsd_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_freebsd_amd64",
+              "platform": "freebsd_amd64"
+            }
+          },
+          "expand_template_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_linux_amd64",
+              "platform": "linux_amd64"
+            }
+          },
+          "copy_to_directory_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_linux_amd64",
+              "platform": "linux_amd64"
+            }
+          },
+          "coreutils_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~coreutils_darwin_arm64",
+              "platform": "darwin_arm64",
+              "version": "0.0.16"
+            }
+          },
+          "coreutils_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~coreutils_linux_amd64",
+              "platform": "linux_amd64",
+              "version": "0.0.16"
+            }
+          },
+          "copy_directory_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_toolchains",
+              "user_repository_name": "copy_directory"
+            }
+          },
+          "copy_to_directory_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_linux_arm64",
+              "platform": "linux_arm64"
+            }
+          },
+          "yq_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_linux_amd64",
+              "platform": "linux_amd64",
+              "version": "4.25.2"
+            }
+          },
+          "copy_to_directory_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_darwin_arm64",
+              "platform": "darwin_arm64"
+            }
+          },
+          "copy_directory_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_darwin_amd64",
+              "platform": "darwin_amd64"
+            }
+          },
+          "coreutils_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~coreutils_darwin_amd64",
+              "platform": "darwin_amd64",
+              "version": "0.0.16"
+            }
+          },
+          "coreutils_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~coreutils_linux_arm64",
+              "platform": "linux_arm64",
+              "version": "0.0.16"
+            }
+          },
+          "coreutils_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~coreutils_toolchains",
+              "user_repository_name": "coreutils"
+            }
+          },
+          "copy_directory_freebsd_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_freebsd_amd64",
+              "platform": "freebsd_amd64"
+            }
+          },
+          "yq_linux_s390x": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_linux_s390x",
+              "platform": "linux_s390x",
+              "version": "4.25.2"
+            }
+          },
+          "yq": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_host_alias_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq"
+            }
+          },
+          "expand_template_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_darwin_amd64",
+              "platform": "darwin_amd64"
+            }
+          },
+          "copy_directory_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_linux_amd64",
+              "platform": "linux_amd64"
+            }
+          },
+          "jq_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~jq_darwin_arm64",
+              "platform": "darwin_arm64",
+              "version": "1.6"
+            }
+          },
+          "yq_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_darwin_amd64",
+              "platform": "darwin_amd64",
+              "version": "4.25.2"
+            }
+          },
+          "copy_directory_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_linux_arm64",
+              "platform": "linux_arm64"
+            }
+          },
+          "expand_template_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_linux_arm64",
+              "platform": "linux_arm64"
+            }
+          },
+          "jq_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~jq_linux_amd64",
+              "platform": "linux_amd64",
+              "version": "1.6"
+            }
+          },
+          "expand_template_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_toolchains",
+              "user_repository_name": "expand_template"
+            }
+          },
+          "yq_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_windows_amd64",
+              "platform": "windows_amd64",
+              "version": "4.25.2"
+            }
+          },
+          "copy_to_directory_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_darwin_amd64",
+              "platform": "darwin_amd64"
+            }
+          },
+          "jq_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~jq_windows_amd64",
+              "platform": "windows_amd64",
+              "version": "1.6"
+            }
+          },
+          "expand_template_freebsd_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~expand_template_freebsd_amd64",
+              "platform": "freebsd_amd64"
+            }
+          },
+          "yq_linux_ppc64le": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_linux_ppc64le",
+              "platform": "linux_ppc64le",
+              "version": "4.25.2"
+            }
+          },
+          "copy_to_directory_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_to_directory_toolchains",
+              "user_repository_name": "copy_to_directory"
+            }
+          },
+          "jq_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~jq_toolchains",
+              "user_repository_name": "jq"
+            }
+          },
+          "copy_directory_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_darwin_arm64",
+              "platform": "darwin_arm64"
+            }
+          },
+          "copy_directory_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~copy_directory_windows_amd64",
+              "platform": "windows_amd64"
+            }
+          },
+          "yq_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_darwin_arm64",
+              "platform": "darwin_arm64",
+              "version": "4.25.2"
+            }
+          },
+          "yq_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_toolchains",
+              "user_repository_name": "yq"
+            }
+          },
+          "coreutils_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~coreutils_windows_amd64",
+              "platform": "windows_amd64",
+              "version": "0.0.16"
+            }
+          },
+          "yq_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~1.40.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~1.40.0~toolchains~yq_linux_arm64",
+              "platform": "linux_arm64",
+              "version": "4.25.2"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~1.40.0",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~1.40.0"
+          ],
+          [
+            "aspect_bazel_lib~1.40.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_bazel_lib~1.40.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
+      }
+    },
+    "@@aspect_rules_esbuild~0.18.0//esbuild:extensions.bzl%esbuild": {
+      "general": {
+        "bzlTransitiveDigest": "7JZsZSyzmtgEYSag0FGDpOgmxGMLpX3e6Gz69zOxkRM=",
+        "accumulatedFileDigests": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "npm__esbuild_0.19.9": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~npm__esbuild_0.19.9",
+              "package": "esbuild",
+              "version": "0.19.9",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-U9CHtKSy+EpPsEBa+/A2gMs/h3ylBC0H0KSqIg7tpztHerLi6nrrcoUJAkNCEPumx8yJ+Byic4BVwHgRbN0TBg==",
+              "url": "",
+              "commit": "",
+              "patch_args": [
+                "-p0"
+              ],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__esbuild_0.19.9__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~npm__esbuild_0.19.9__links",
+              "package": "esbuild",
+              "version": "0.19.9",
+              "dev": false,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {},
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "esbuild_linux-x64": {
+            "bzlFile": "@@aspect_rules_esbuild~0.18.0//esbuild:repositories.bzl",
+            "ruleClassName": "esbuild_repositories",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~esbuild_linux-x64",
+              "esbuild_version": "0.19.9",
+              "platform": "linux-x64"
+            }
+          },
+          "esbuild_toolchains": {
+            "bzlFile": "@@aspect_rules_esbuild~0.18.0//esbuild/private:toolchains_repo.bzl",
+            "ruleClassName": "toolchains_repo",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~esbuild_toolchains",
+              "esbuild_version": "0.19.9",
+              "user_repository_name": "esbuild"
+            }
+          },
+          "esbuild_darwin-arm64": {
+            "bzlFile": "@@aspect_rules_esbuild~0.18.0//esbuild:repositories.bzl",
+            "ruleClassName": "esbuild_repositories",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~esbuild_darwin-arm64",
+              "esbuild_version": "0.19.9",
+              "platform": "darwin-arm64"
+            }
+          },
+          "esbuild_win32-x64": {
+            "bzlFile": "@@aspect_rules_esbuild~0.18.0//esbuild:repositories.bzl",
+            "ruleClassName": "esbuild_repositories",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~esbuild_win32-x64",
+              "esbuild_version": "0.19.9",
+              "platform": "win32-x64"
+            }
+          },
+          "esbuild_darwin-x64": {
+            "bzlFile": "@@aspect_rules_esbuild~0.18.0//esbuild:repositories.bzl",
+            "ruleClassName": "esbuild_repositories",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~esbuild_darwin-x64",
+              "esbuild_version": "0.19.9",
+              "platform": "darwin-x64"
+            }
+          },
+          "esbuild_linux-arm64": {
+            "bzlFile": "@@aspect_rules_esbuild~0.18.0//esbuild:repositories.bzl",
+            "ruleClassName": "esbuild_repositories",
+            "attributes": {
+              "name": "aspect_rules_esbuild~0.18.0~esbuild~esbuild_linux-arm64",
+              "esbuild_version": "0.19.9",
+              "platform": "linux-arm64"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~1.40.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_bazel_lib~1.40.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "aspect_rules_esbuild~0.18.0",
+            "aspect_rules_js",
+            "aspect_rules_js~1.38.0"
+          ],
+          [
+            "aspect_rules_esbuild~0.18.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~1.40.0"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
+      }
+    },
+    "@@aspect_rules_js~1.38.0//npm:extensions.bzl%npm": {
+      "general": {
+        "bzlTransitiveDigest": "V86h7+2ANfcaoGUfFJSSfqf9ukbCKobu5rdIr0BjI9c=",
+        "accumulatedFileDigests": {
+          "@@aspect_bazel_lib~1.40.0~toolchains~yq_darwin_arm64//:yq": "db8c11ca4c1dda8fe7c211e82e28191d48bd9ae83471b952003e819de79bcb51",
+          "@@//:pnpm-lock.yaml": "a82f2bf158ed1a8c5d4392b04fd6e2cc173a450b708dce7f43f12c9bce569f7a"
+        },
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "npm__at_rollup_rollup-win32-arm64-msvc__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-win32-arm64-msvc__4.12.0__links",
+              "package": "@rollup/rollup-win32-arm64-msvc",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-win32-arm64-msvc": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-mips64el__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-mips64el__0.19.12__links",
+              "package": "@esbuild/linux-mips64el",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-mips64el": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-darwin-arm64__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-darwin-arm64__4.12.0__links",
+              "package": "@rollup/rollup-darwin-arm64",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-darwin-arm64": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-x64-gnu__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-x64-gnu__4.12.0",
+              "package": "@rollup/rollup-linux-x64-gnu",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-TenQhZVOtw/3qKOPa7d+QgkeM6xY0LtwzR8OplmyL5LrgTWIXpTQg2Q2ycBf8jm+SFW2Wt/DTn1gf7nFp3ssVA==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-riscv64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-riscv64__0.19.12__links",
+              "package": "@esbuild/linux-riscv64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-riscv64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_android-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_android-x64__0.19.12",
+              "package": "@esbuild/android-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-3k7ZoUW6Q6YqhdhIaq/WZ7HwBpnFBlW905Fa4s4qWJyiNOgT1dOqDiVAQFwBH7gBRZr17gLrlFCRzF6jFh7Kew==",
+              "url": "https://registry.npmjs.org/@esbuild/android-x64/-/android-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-darwin-arm64__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-darwin-arm64__4.12.0",
+              "package": "@rollup/rollup-darwin-arm64",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-X64tZd8dRE/QTrBIEs63kaOBG0b5GVEd3ccoLtyf6IdXtHdh8h+I56C2yC3PtC9Ucnv0CpNFJLqKFVgCYe0lOQ==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-linux-x64-gnu__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-x64-gnu__4.12.0__links",
+              "package": "@rollup/rollup-linux-x64-gnu",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-linux-x64-gnu": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-x64-musl__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-x64-musl__4.12.0",
+              "package": "@rollup/rollup-linux-x64-musl",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-LfFdRhNnW0zdMvdCb5FNuWlls2WbbSridJvxOvYWgSBOYZtgBfW9UGNJG//rwMqTX1xQE9BAodvMH9tAusKDUw==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__esbuild__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__esbuild__0.19.12",
+              "package": "esbuild",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-aARqgq8roFBj054KvQr5f1sFu0D65G+miZRCuJyJ0G13Zwx7vRar5Zhn2tkQNzIXcBrNVsv/8stehpj+GAjgbg==",
+              "url": "https://registry.npmjs.org/esbuild/-/esbuild-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-ia32__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-ia32__0.19.12",
+              "package": "@esbuild/linux-ia32",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-Thsa42rrP1+UIGaWz47uydHSBOgTUnwBwNq59khgIwktK6x60Hivfbux9iNR0eHCHzOLjLMLfUMLCypBkZXMHA==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-ia32/-/linux-ia32-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-ppc64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-ppc64__0.19.12__links",
+              "package": "@esbuild/linux-ppc64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-ppc64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-x64__0.19.12__links",
+              "package": "@esbuild/linux-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__esbuild__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__esbuild__0.19.12__links",
+              "package": "esbuild",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {
+                "@esbuild/aix-ppc64": "0.19.12",
+                "@esbuild/android-arm": "0.19.12",
+                "@esbuild/android-arm64": "0.19.12",
+                "@esbuild/android-x64": "0.19.12",
+                "@esbuild/darwin-arm64": "0.19.12",
+                "@esbuild/darwin-x64": "0.19.12",
+                "@esbuild/freebsd-arm64": "0.19.12",
+                "@esbuild/freebsd-x64": "0.19.12",
+                "@esbuild/linux-arm": "0.19.12",
+                "@esbuild/linux-arm64": "0.19.12",
+                "@esbuild/linux-ia32": "0.19.12",
+                "@esbuild/linux-loong64": "0.19.12",
+                "@esbuild/linux-mips64el": "0.19.12",
+                "@esbuild/linux-ppc64": "0.19.12",
+                "@esbuild/linux-riscv64": "0.19.12",
+                "@esbuild/linux-s390x": "0.19.12",
+                "@esbuild/linux-x64": "0.19.12",
+                "@esbuild/netbsd-x64": "0.19.12",
+                "@esbuild/openbsd-x64": "0.19.12",
+                "@esbuild/sunos-x64": "0.19.12",
+                "@esbuild/win32-arm64": "0.19.12",
+                "@esbuild/win32-ia32": "0.19.12",
+                "@esbuild/win32-x64": "0.19.12"
+              },
+              "transitive_closure": {
+                "@esbuild/aix-ppc64": [
+                  "0.19.12"
+                ],
+                "@esbuild/android-arm": [
+                  "0.19.12"
+                ],
+                "@esbuild/android-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/android-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/darwin-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/darwin-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/freebsd-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/freebsd-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-arm": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-ia32": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-loong64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-mips64el": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-ppc64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-riscv64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-s390x": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/netbsd-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/openbsd-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/sunos-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/win32-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/win32-ia32": [
+                  "0.19.12"
+                ],
+                "@esbuild/win32-x64": [
+                  "0.19.12"
+                ],
+                "esbuild": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_openbsd-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_openbsd-x64__0.19.12__links",
+              "package": "@esbuild/openbsd-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/openbsd-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__fsevents__2.3.3__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__fsevents__2.3.3__links",
+              "package": "fsevents",
+              "version": "2.3.3",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "fsevents": [
+                  "2.3.3"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_win32-arm64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_win32-arm64__0.19.12",
+              "package": "@esbuild/win32-arm64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-URgtR1dJnmGvX864pn1B2YUYNzjmXkuJOIqG2HdU62MVS4EHpU2946OZoTMnRUHklGtJdJZ33QfzdjGACXhn1A==",
+              "url": "https://registry.npmjs.org/@esbuild/win32-arm64/-/win32-arm64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-win32-arm64-msvc__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-win32-arm64-msvc__4.12.0",
+              "package": "@rollup/rollup-win32-arm64-msvc",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-JPDxovheWNp6d7AHCgsUlkuCKvtu3RB55iNEkaQcf0ttsDU/JZF+iQnYcQJSk/7PtT4mjjVG8N1kpwnI9SLYaw==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__postcss__8.4.35": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__postcss__8.4.35",
+              "package": "postcss",
+              "version": "8.4.35",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==",
+              "url": "https://registry.npmjs.org/postcss/-/postcss-8.4.35.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__fsevents__2.3.3": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__fsevents__2.3.3",
+              "package": "fsevents",
+              "version": "2.3.3",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
+              "url": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-ppc64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-ppc64__0.19.12",
+              "package": "@esbuild/linux-ppc64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-nYJA2/QPimDQOh1rKWedNOe3Gfc8PabU7HT3iXWtNUbRzXS9+vgB0Fjaqr//XNbd82mCxHzik2qotuI89cfixg==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-ppc64/-/linux-ppc64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_freebsd-arm64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_freebsd-arm64__0.19.12",
+              "package": "@esbuild/freebsd-arm64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-4aRvFIXmwAcDBw9AueDQ2YnGmz5L6obe5kmPT8Vd+/+x/JMVKCgdcRwH6APrbpNXsPz+K653Qg8HB/oXvXVukA==",
+              "url": "https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-win32-x64-msvc__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-win32-x64-msvc__4.12.0__links",
+              "package": "@rollup/rollup-win32-x64-msvc",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-win32-x64-msvc": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-win32-ia32-msvc__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-win32-ia32-msvc__4.12.0__links",
+              "package": "@rollup/rollup-win32-ia32-msvc",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-win32-ia32-msvc": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__picocolors__1.0.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__picocolors__1.0.0__links",
+              "package": "picocolors",
+              "version": "1.0.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "picocolors": [
+                  "1.0.0"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-arm-gnueabihf__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-arm-gnueabihf__4.12.0__links",
+              "package": "@rollup/rollup-linux-arm-gnueabihf",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-linux-arm-gnueabihf": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_aix-ppc64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_aix-ppc64__0.19.12__links",
+              "package": "@esbuild/aix-ppc64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/aix-ppc64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_netbsd-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_netbsd-x64__0.19.12__links",
+              "package": "@esbuild/netbsd-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/netbsd-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_freebsd-arm64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_freebsd-arm64__0.19.12__links",
+              "package": "@esbuild/freebsd-arm64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/freebsd-arm64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_android-arm__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_android-arm__0.19.12__links",
+              "package": "@esbuild/android-arm",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/android-arm": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-android-arm-eabi__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-android-arm-eabi__4.12.0",
+              "package": "@rollup/rollup-android-arm-eabi",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-+ac02NL/2TCKRrJu2wffk1kZ+RyqxVUlbjSagNgPm94frxtr+XDL12E5Ll1enWskLrtrZ2r8L3wED1orIibV/w==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_darwin-arm64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_darwin-arm64__0.19.12__links",
+              "package": "@esbuild/darwin-arm64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/darwin-arm64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_sunos-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_sunos-x64__0.19.12__links",
+              "package": "@esbuild/sunos-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/sunos-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-android-arm64__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-android-arm64__4.12.0",
+              "package": "@rollup/rollup-android-arm64",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-OBqcX2BMe6nvjQ0Nyp7cC90cnumt8PXmO7Dp3gfAju/6YwG0Tj74z1vKrfRz7qAv23nBcYM8BCbhrsWqO7PzQQ==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_sunos-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_sunos-x64__0.19.12",
+              "package": "@esbuild/sunos-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-HKjJwRrW8uWtCQnQOz9qcU3mUZhTUQvi56Q8DPTLLB+DawoiQdjsYq+j+D3s9I8VFtDr+F9CjgXKKC4ss89IeA==",
+              "url": "https://registry.npmjs.org/@esbuild/sunos-x64/-/sunos-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-darwin-x64__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-darwin-x64__4.12.0__links",
+              "package": "@rollup/rollup-darwin-x64",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-darwin-x64": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-android-arm-eabi__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-android-arm-eabi__4.12.0__links",
+              "package": "@rollup/rollup-android-arm-eabi",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-android-arm-eabi": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-loong64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-loong64__0.19.12",
+              "package": "@esbuild/linux-loong64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-LiXdXA0s3IqRRjm6rV6XaWATScKAXjI4R4LoDlvO7+yQqFdlr1Bax62sRwkVvRIrwXxvtYEHHI4dm50jAXkuAA==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-loong64/-/linux-loong64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_win32-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_win32-x64__0.19.12__links",
+              "package": "@esbuild/win32-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/win32-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-loong64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-loong64__0.19.12__links",
+              "package": "@esbuild/linux-loong64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-loong64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__postcss__8.4.35__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__postcss__8.4.35__links",
+              "package": "postcss",
+              "version": "8.4.35",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {
+                "nanoid": "3.3.7",
+                "picocolors": "1.0.0",
+                "source-map-js": "1.0.2"
+              },
+              "transitive_closure": {
+                "nanoid": [
+                  "3.3.7"
+                ],
+                "picocolors": [
+                  "1.0.0"
+                ],
+                "postcss": [
+                  "8.4.35"
+                ],
+                "source-map-js": [
+                  "1.0.2"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__source-map-js__1.0.2": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__source-map-js__1.0.2",
+              "package": "source-map-js",
+              "version": "1.0.2",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==",
+              "url": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-linux-arm64-gnu__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-arm64-gnu__4.12.0__links",
+              "package": "@rollup/rollup-linux-arm64-gnu",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-linux-arm64-gnu": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-s390x__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-s390x__0.19.12",
+              "package": "@esbuild/linux-s390x",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-+Pil1Nv3Umes4m3AZKqA2anfhJiVmNCYkPchwFJNEJN5QxmTs1uzyy4TvmDrCRNT2ApwSari7ZIgrPeUx4UZDg==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-s390x/-/linux-s390x-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-linux-x64-musl__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-x64-musl__4.12.0__links",
+              "package": "@rollup/rollup-linux-x64-musl",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-linux-x64-musl": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-arm__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-arm__0.19.12",
+              "package": "@esbuild/linux-arm",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-J5jPms//KhSNv+LO1S1TX1UWp1ucM6N6XuL6ITdKWElCu8wXP72l9MM0zDTzzeikVyqFE6U8YAV9/tFyj0ti+w==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-arm/-/linux-arm-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__nanoid__3.3.7": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__nanoid__3.3.7",
+              "package": "nanoid",
+              "version": "3.3.7",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==",
+              "url": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.7.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_android-arm64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_android-arm64__0.19.12__links",
+              "package": "@esbuild/android-arm64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/android-arm64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-riscv64-gnu__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-riscv64-gnu__4.12.0__links",
+              "package": "@rollup/rollup-linux-riscv64-gnu",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-linux-riscv64-gnu": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_win32-ia32__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_win32-ia32__0.19.12__links",
+              "package": "@esbuild/win32-ia32",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/win32-ia32": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__vite__5.1.4__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__vite__5.1.4__links",
+              "package": "vite",
+              "version": "5.1.4",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {
+                "ibazel/vite": [
+                  "vite"
+                ]
+              },
+              "deps": {
+                "fsevents": "2.3.3",
+                "esbuild": "0.19.12",
+                "postcss": "8.4.35",
+                "rollup": "4.12.0"
+              },
+              "transitive_closure": {
+                "@esbuild/aix-ppc64": [
+                  "0.19.12"
+                ],
+                "@esbuild/android-arm": [
+                  "0.19.12"
+                ],
+                "@esbuild/android-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/android-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/darwin-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/darwin-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/freebsd-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/freebsd-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-arm": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-ia32": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-loong64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-mips64el": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-ppc64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-riscv64": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-s390x": [
+                  "0.19.12"
+                ],
+                "@esbuild/linux-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/netbsd-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/openbsd-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/sunos-x64": [
+                  "0.19.12"
+                ],
+                "@esbuild/win32-arm64": [
+                  "0.19.12"
+                ],
+                "@esbuild/win32-ia32": [
+                  "0.19.12"
+                ],
+                "@esbuild/win32-x64": [
+                  "0.19.12"
+                ],
+                "@rollup/rollup-android-arm-eabi": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-android-arm64": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-darwin-arm64": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-darwin-x64": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-arm-gnueabihf": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-arm64-gnu": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-arm64-musl": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-riscv64-gnu": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-x64-gnu": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-x64-musl": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-win32-arm64-msvc": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-win32-ia32-msvc": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-win32-x64-msvc": [
+                  "4.12.0"
+                ],
+                "@types/estree": [
+                  "1.0.5"
+                ],
+                "esbuild": [
+                  "0.19.12"
+                ],
+                "fsevents": [
+                  "2.3.3"
+                ],
+                "nanoid": [
+                  "3.3.7"
+                ],
+                "picocolors": [
+                  "1.0.0"
+                ],
+                "postcss": [
+                  "8.4.35"
+                ],
+                "rollup": [
+                  "4.12.0"
+                ],
+                "source-map-js": [
+                  "1.0.2"
+                ],
+                "vite": [
+                  "5.1.4"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-arm64-musl__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-arm64-musl__4.12.0__links",
+              "package": "@rollup/rollup-linux-arm64-musl",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-linux-arm64-musl": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_darwin-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_darwin-x64__0.19.12",
+              "package": "@esbuild/darwin-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-hKoVkKzFiToTgn+41qGhsUJXFlIjxI/jSYeZf3ugemDYZldIXIxhvwN6erJGlX4t5h417iFuheZ7l+YVn05N3A==",
+              "url": "https://registry.npmjs.org/@esbuild/darwin-x64/-/darwin-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__rollup__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__rollup__4.12.0__links",
+              "package": "rollup",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {
+                "@rollup/rollup-android-arm-eabi": "4.12.0",
+                "@rollup/rollup-android-arm64": "4.12.0",
+                "@rollup/rollup-darwin-arm64": "4.12.0",
+                "@rollup/rollup-darwin-x64": "4.12.0",
+                "@rollup/rollup-linux-arm-gnueabihf": "4.12.0",
+                "@rollup/rollup-linux-arm64-gnu": "4.12.0",
+                "@rollup/rollup-linux-arm64-musl": "4.12.0",
+                "@rollup/rollup-linux-riscv64-gnu": "4.12.0",
+                "@rollup/rollup-linux-x64-gnu": "4.12.0",
+                "@rollup/rollup-linux-x64-musl": "4.12.0",
+                "@rollup/rollup-win32-arm64-msvc": "4.12.0",
+                "@rollup/rollup-win32-ia32-msvc": "4.12.0",
+                "@rollup/rollup-win32-x64-msvc": "4.12.0",
+                "fsevents": "2.3.3",
+                "@types/estree": "1.0.5"
+              },
+              "transitive_closure": {
+                "@rollup/rollup-android-arm-eabi": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-android-arm64": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-darwin-arm64": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-darwin-x64": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-arm-gnueabihf": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-arm64-gnu": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-arm64-musl": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-riscv64-gnu": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-x64-gnu": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-linux-x64-musl": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-win32-arm64-msvc": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-win32-ia32-msvc": [
+                  "4.12.0"
+                ],
+                "@rollup/rollup-win32-x64-msvc": [
+                  "4.12.0"
+                ],
+                "@types/estree": [
+                  "1.0.5"
+                ],
+                "fsevents": [
+                  "2.3.3"
+                ],
+                "rollup": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_openbsd-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_openbsd-x64__0.19.12",
+              "package": "@esbuild/openbsd-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-RbrfTB9SWsr0kWmb9srfF+L933uMDdu9BIzdA7os2t0TXhCRjrQyCeOt6wVxr79CKD4c+p+YhCj31HBkYcXebw==",
+              "url": "https://registry.npmjs.org/@esbuild/openbsd-x64/-/openbsd-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-linux-riscv64-gnu__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-riscv64-gnu__4.12.0",
+              "package": "@rollup/rollup-linux-riscv64-gnu",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-ix+qAB9qmrCRiaO71VFfY8rkiAZJL8zQRXveS27HS+pKdjwUfEhqo2+YF2oI+H/22Xsiski+qqwIBxVewLK7sw==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_aix-ppc64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_aix-ppc64__0.19.12",
+              "package": "@esbuild/aix-ppc64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==",
+              "url": "https://registry.npmjs.org/@esbuild/aix-ppc64/-/aix-ppc64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-darwin-x64__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-darwin-x64__4.12.0",
+              "package": "@rollup/rollup-darwin-x64",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-cc71KUZoVbUJmGP2cOuiZ9HSOP14AzBAThn3OU+9LcA1+IUqswJyR1cAJj3Mg55HbjZP6OLAIscbQsQLrpgTOg==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_darwin-arm64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_darwin-arm64__0.19.12",
+              "package": "@esbuild/darwin-arm64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-B6IeSgZgtEzGC42jsI+YYu9Z3HKRxp8ZT3cqhvliEHovq8HSX2YX8lNocDn79gCKJXOSaEot9MVYky7AKjCs8g==",
+              "url": "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_win32-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_win32-x64__0.19.12",
+              "package": "@esbuild/win32-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-T1QyPSDCyMXaO3pzBkF96E8xMkiRYbUEZADd29SyPGabqxMViNoii+NcK7eWJAEoU6RZyEm5lVSIjTmcdoB9HA==",
+              "url": "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-ia32__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-ia32__0.19.12__links",
+              "package": "@esbuild/linux-ia32",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-ia32": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_types_estree__1.0.5__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_types_estree__1.0.5__links",
+              "package": "@types/estree",
+              "version": "1.0.5",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@types/estree": [
+                  "1.0.5"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_android-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_android-x64__0.19.12__links",
+              "package": "@esbuild/android-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/android-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__vite__5.1.4": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__vite__5.1.4",
+              "package": "vite",
+              "version": "5.1.4",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {
+                "ibazel/vite": [
+                  "vite"
+                ]
+              },
+              "integrity": "sha512-n+MPqzq+d9nMVTKyewqw6kSt+R3CkvF9QAKY8obiQn8g1fwTscKxyfaYnC632HtBXAQGc1Yjomphwn1dtwGAHg==",
+              "url": "https://registry.npmjs.org/vite/-/vite-5.1.4.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-s390x__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-s390x__0.19.12__links",
+              "package": "@esbuild/linux-s390x",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-s390x": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_win32-arm64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_win32-arm64__0.19.12__links",
+              "package": "@esbuild/win32-arm64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/win32-arm64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-arm-gnueabihf__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-arm-gnueabihf__4.12.0",
+              "package": "@rollup/rollup-linux-arm-gnueabihf",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-a6w/Y3hyyO6GlpKL2xJ4IOh/7d+APaqLYdMf86xnczU3nurFTaVN9s9jOXQg97BE4nYm/7Ga51rjec5nfRdrvA==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-linux-arm64-musl__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-arm64-musl__4.12.0",
+              "package": "@rollup/rollup-linux-arm64-musl",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-eTvzUS3hhhlgeAv6bfigekzWZjaEX9xP9HhxB0Dvrdbkk5w/b+1Sxct2ZuDxNJKzsRStSq1EaEkVSEe7A7ipgQ==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-win32-x64-msvc__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-win32-x64-msvc__4.12.0",
+              "package": "@rollup/rollup-win32-x64-msvc",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-ZYmr5mS2wd4Dew/JjT0Fqi2NPB/ZhZ2VvPp7SmvPZb4Y1CG/LRcS6tcRo2cYU7zLK5A7cdbhWnnWmUjoI4qapg==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-arm__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-arm__0.19.12__links",
+              "package": "@esbuild/linux-arm",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-arm": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_rollup_rollup-linux-arm64-gnu__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-linux-arm64-gnu__4.12.0",
+              "package": "@rollup/rollup-linux-arm64-gnu",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-0fZBq27b+D7Ar5CQMofVN8sggOVhEtzFUwOwPppQt0k+VR+7UHMZZY4y+64WJ06XOhBTKXtQB/Sv0NwQMXyNAA==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_netbsd-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_netbsd-x64__0.19.12",
+              "package": "@esbuild/netbsd-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-3ltjQ7n1owJgFbuC61Oj++XhtzmymoCihNFgT84UAmJnxJfm4sYCiSLTXZtE00VWYpPMYc+ZQmB6xbSdVh0JWA==",
+              "url": "https://registry.npmjs.org/@esbuild/netbsd-x64/-/netbsd-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__nanoid__3.3.7__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__nanoid__3.3.7__links",
+              "package": "nanoid",
+              "version": "3.3.7",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "nanoid": [
+                  "3.3.7"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-x64__0.19.12",
+              "package": "@esbuild/linux-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-B71g1QpxfwBvNrfyJdVDexenDIt1CiDN1TIXLbhOw0KhJzE78KIFGX6OJ9MrtC0oOqMWf+0xop4qEU8JrJTwCg==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_types_estree__1.0.5": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_types_estree__1.0.5",
+              "package": "@types/estree",
+              "version": "1.0.5",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==",
+              "url": "https://registry.npmjs.org/@types/estree/-/estree-1.0.5.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__rollup__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__rollup__4.12.0",
+              "package": "rollup",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-wz66wn4t1OHIJw3+XU7mJJQV/2NAfw5OAk6G6Hoo3zcvz/XOfQ52Vgi+AN4Uxoxi0KBBwk2g8zPrTDA4btSB/Q==",
+              "url": "https://registry.npmjs.org/rollup/-/rollup-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-android-arm64__4.12.0__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-android-arm64__4.12.0__links",
+              "package": "@rollup/rollup-android-arm64",
+              "version": "4.12.0",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@rollup/rollup-android-arm64": [
+                  "4.12.0"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_translate_lock.bzl",
+            "ruleClassName": "npm_translate_lock_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm",
+              "pnpm_lock": "@@//:pnpm-lock.yaml",
+              "update_pnpm_lock": false,
+              "use_home_npmrc": false,
+              "patches": {},
+              "patch_args": {},
+              "custom_postinstalls": {},
+              "package_visibility": {},
+              "prod": false,
+              "public_hoist_packages": {},
+              "dev": false,
+              "no_optional": false,
+              "lifecycle_hooks": {
+                "*": [
+                  "preinstall",
+                  "install",
+                  "postinstall"
+                ]
+              },
+              "lifecycle_hooks_envs": {},
+              "lifecycle_hooks_execution_requirements": {
+                "*": [
+                  "no-sandbox"
+                ]
+              },
+              "lifecycle_hooks_use_default_shell_env": {
+                "*": "false"
+              },
+              "replace_packages": {},
+              "bins": {},
+              "verify_node_modules_ignored": "@@//:.bazelignore",
+              "external_repository_action_cache": ".aspect/rules/external_repository_action_cache",
+              "link_workspace": "",
+              "root_package": ".",
+              "additional_file_contents": {},
+              "repositories_bzl_filename": "repositories.bzl",
+              "defs_bzl_filename": "defs.bzl",
+              "generate_bzl_library_targets": false,
+              "data": [],
+              "preupdate": [],
+              "quiet": true,
+              "node_toolchain_prefix": "nodejs",
+              "yq_toolchain_prefix": "yq",
+              "npm_package_target_name": "{dirname}",
+              "use_starlark_yaml_parser": false,
+              "bzlmod": true
+            }
+          },
+          "npm__at_esbuild_linux-arm64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-arm64__0.19.12__links",
+              "package": "@esbuild/linux-arm64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/linux-arm64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_win32-ia32__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_win32-ia32__0.19.12",
+              "package": "@esbuild/win32-ia32",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-+ZOE6pUkMOJfmxmBZElNOx72NKpIa/HFOMGzu8fqzQJ5kgf6aTGrcJaFsNiVMH4JKpMipyK+7k0n2UXN7a8YKQ==",
+              "url": "https://registry.npmjs.org/@esbuild/win32-ia32/-/win32-ia32-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__source-map-js__1.0.2__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__source-map-js__1.0.2__links",
+              "package": "source-map-js",
+              "version": "1.0.2",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "source-map-js": [
+                  "1.0.2"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-mips64el__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-mips64el__0.19.12",
+              "package": "@esbuild/linux-mips64el",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-fEnAuj5VGTanfJ07ff0gOA6IPsvrVHLVb6Lyd1g2/ed67oU1eFzL0r9WL7ZzscD+/N6i3dWumGE1Un4f7Amf+w==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-mips64el/-/linux-mips64el-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_android-arm64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_android-arm64__0.19.12",
+              "package": "@esbuild/android-arm64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-P0UVNGIienjZv3f5zq0DP3Nt2IE/3plFzuaS96vihvD0Hd6H/q4WXUGpCxD/E8YrSXfNyRPbpTq+T8ZQioSuPA==",
+              "url": "https://registry.npmjs.org/@esbuild/android-arm64/-/android-arm64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_linux-arm64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-arm64__0.19.12",
+              "package": "@esbuild/linux-arm64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-EoTjyYyLuVPfdPLsGVVVC8a0p1BFFvtpQDB/YLEhaXyf/5bczaGeN15QkR+O4S5LeJ92Tqotve7i1jn35qwvdA==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_freebsd-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_freebsd-x64__0.19.12__links",
+              "package": "@esbuild/freebsd-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/freebsd-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_linux-riscv64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_linux-riscv64__0.19.12",
+              "package": "@esbuild/linux-riscv64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-2MueBrlPQCw5dVJJpQdUYgeqIzDQgw3QtiAHUC4RBz9FXPrskyyU3VI1hw7C0BSKB9OduwSJ79FTCqtGMWqJHg==",
+              "url": "https://registry.npmjs.org/@esbuild/linux-riscv64/-/linux-riscv64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_rollup_rollup-win32-ia32-msvc__4.12.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_rollup_rollup-win32-ia32-msvc__4.12.0",
+              "package": "@rollup/rollup-win32-ia32-msvc",
+              "version": "4.12.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-fjtuvMWRGJn1oZacG8IPnzIV6GF2/XG+h71FKn76OYFqySXInJtseAqdprVTDTyqPxQOG9Exak5/E9Z3+EJ8ZA==",
+              "url": "https://registry.npmjs.org/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.12.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_darwin-x64__0.19.12__links": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_darwin-x64__0.19.12__links",
+              "package": "@esbuild/darwin-x64",
+              "version": "0.19.12",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "@esbuild/darwin-x64": [
+                  "0.19.12"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
+          "npm__at_esbuild_freebsd-x64__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_freebsd-x64__0.19.12",
+              "package": "@esbuild/freebsd-x64",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-EYoXZ4d8xtBoVN7CEwWY2IN4ho76xjYXqSXMNccFSx2lgqOG/1TBPW0yPx1bJZk94qu3tX0fycJeeQsKovA8gg==",
+              "url": "https://registry.npmjs.org/@esbuild/freebsd-x64/-/freebsd-x64-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__picocolors__1.0.0": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__picocolors__1.0.0",
+              "package": "picocolors",
+              "version": "1.0.0",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==",
+              "url": "https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          },
+          "npm__at_esbuild_android-arm__0.19.12": {
+            "bzlFile": "@@aspect_rules_js~1.38.0//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "name": "aspect_rules_js~1.38.0~npm~npm__at_esbuild_android-arm__0.19.12",
+              "package": "@esbuild/android-arm",
+              "version": "0.19.12",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-qg/Lj1mu3CdQlDEEiWrlC4eaPZ1KztwGJ9B6J+/6G+/4ewxJg7gqj8eVYWvao1bXrqGiW2rsBZFSX3q2lcW05w==",
+              "url": "https://registry.npmjs.org/@esbuild/android-arm/-/android-arm-0.19.12.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~1.40.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_bazel_lib~1.40.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~1.40.0"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "aspect_rules_js~1.38.0",
+            "yq_darwin_arm64",
+            "aspect_bazel_lib~1.40.0~toolchains~yq_darwin_arm64"
+          ]
+        ]
       }
     },
     "@@bazel_features~1.1.1//private:extensions.bzl%version_extension": {
@@ -1505,12 +5538,13 @@
               }
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@bazel_tools//tools/cpp:cc_configure.bzl%cc_configure_extension": {
       "general": {
-        "bzlTransitiveDigest": "O9sf6ilKWU9Veed02jG9o2HM/xgV/UAyciuFBuxrFRY=",
+        "bzlTransitiveDigest": "mcsWHq3xORJexV5/4eCvNOLxFOQKV6eli3fkr+tEaqE=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -1528,7 +5562,14 @@
               "name": "bazel_tools~cc_configure_extension~local_config_cc_toolchains"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "bazel_tools",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@bazel_tools//tools/osx:xcode_configure.bzl%xcode_configure_extension": {
@@ -1546,7 +5587,8 @@
               "remote_xcode": ""
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@bazel_tools//tools/sh:sh_configure.bzl%sh_configure_extension": {
@@ -1562,7 +5604,8 @@
               "name": "bazel_tools~sh_configure_extension~local_config_sh"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@gazelle~0.34.0//:extensions.bzl%go_deps": {
@@ -1981,7 +6024,8 @@
           ],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO"
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@gazelle~0.34.0//internal/bzlmod:non_module_deps.bzl%non_module_deps": {
@@ -2015,47 +6059,37 @@
               "go_env": {}
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
-    "@@hermetic_cc_toolchain~2.1.2//toolchain:ext.bzl%toolchains": {
+    "@@rules_buf~0.1.1//buf:extensions.bzl%ext": {
       "general": {
-        "bzlTransitiveDigest": "MletvvjyahEN99kjfkuMuM4vP3PWB+ftvK7uSBpd/hk=",
+        "bzlTransitiveDigest": "+opT3S3Uq1Jv9SRn79PC3xP4IMlTWGXpXakUIi70oE0=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
-          "zig_sdk": {
-            "bzlFile": "@@hermetic_cc_toolchain~2.1.2//toolchain:defs.bzl",
-            "ruleClassName": "zig_repository",
+          "rules_buf_toolchains": {
+            "bzlFile": "@@rules_buf~0.1.1//buf/internal:toolchain.bzl",
+            "ruleClassName": "buf_download_releases",
             "attributes": {
-              "name": "hermetic_cc_toolchain~2.1.2~toolchains~zig_sdk",
-              "version": "0.11.0",
-              "url_formats": [
-                "https://mirror.bazel.build/ziglang.org/download/{version}/zig-{host_platform}-{version}.{_ext}",
-                "https://ziglang.org/download/{version}/zig-{host_platform}-{version}.{_ext}"
-              ],
-              "host_platform_sha256": {
-                "linux-aarch64": "956eb095d8ba44ac6ebd27f7c9956e47d92937c103bf754745d0a39cdaa5d4c6",
-                "linux-x86_64": "2d00e789fec4f71790a6e7bf83ff91d564943c5ee843c5fd966efc474b423047",
-                "macos-aarch64": "c6ebf927bb13a707d74267474a9f553274e64906fd21bf1c75a20bde8cadf7b2",
-                "macos-x86_64": "1c1c6b9a906b42baae73656e24e108fd8444bb50b6e8fd03e9e7a3f8b5f05686",
-                "windows-x86_64": "142caa3b804d86b4752556c9b6b039b7517a08afa3af842645c7e2dcd125f652"
-              },
-              "host_platform_ext": {
-                "linux-aarch64": "tar.xz",
-                "linux-x86_64": "tar.xz",
-                "macos-aarch64": "tar.xz",
-                "macos-x86_64": "tar.xz",
-                "windows-x86_64": "zip"
-              }
+              "name": "rules_buf~0.1.1~ext~rules_buf_toolchains",
+              "version": "v1.27.0"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_buf~0.1.1",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@rules_go~0.42.0//go:extensions.bzl%go_sdk": {
       "os:osx,arch:aarch64": {
-        "bzlTransitiveDigest": "G2qnTlBBa9eTHC7TZFVz1vGqrdiGJyHKWVLwacYRx+w=",
+        "bzlTransitiveDigest": "AIYb5ska4eDavLpqYkjnhMMBIvlBb+gEVmrHieEMnho=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -2110,7 +6144,29 @@
               ]
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_globals",
+            "bazel_features~1.1.1~version_extension~bazel_features_globals"
+          ],
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_version",
+            "bazel_features~1.1.1~version_extension~bazel_features_version"
+          ],
+          [
+            "rules_go~0.42.0",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "rules_go~0.42.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@rules_go~0.42.0//go/private:extensions.bzl%non_module_dependencies": {
@@ -2332,12 +6388,13 @@
               ]
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_java~7.1.0//java:extensions.bzl%toolchains": {
       "general": {
-        "bzlTransitiveDigest": "iUIRqCK7tkhvcDJCAfPPqSd06IHG0a8HQD0xeQyVAqw=",
+        "bzlTransitiveDigest": "D02GmifxnV/IhYgspsJMDZ/aE8HxAjXgek5gi6FSto4=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -2872,12 +6929,121 @@
               "build_file": "\nconfig_setting(\n    name = \"prefix_version_setting\",\n    values = {\"java_runtime_version\": \"remotejdk_21\"},\n    visibility = [\"//visibility:private\"],\n)\nconfig_setting(\n    name = \"version_setting\",\n    values = {\"java_runtime_version\": \"21\"},\n    visibility = [\"//visibility:private\"],\n)\nalias(\n    name = \"version_or_prefix_version_setting\",\n    actual = select({\n        \":version_setting\": \":version_setting\",\n        \"//conditions:default\": \":prefix_version_setting\",\n    }),\n    visibility = [\"//visibility:private\"],\n)\ntoolchain(\n    name = \"toolchain\",\n    target_compatible_with = [\"@platforms//os:windows\", \"@platforms//cpu:x86_64\"],\n    target_settings = [\":version_or_prefix_version_setting\"],\n    toolchain_type = \"@bazel_tools//tools/jdk:runtime_toolchain_type\",\n    toolchain = \"@remotejdk21_win//:jdk\",\n)\ntoolchain(\n    name = \"bootstrap_runtime_toolchain\",\n    # These constraints are not required for correctness, but prevent fetches of remote JDK for\n    # different architectures. As every Java compilation toolchain depends on a bootstrap runtime in\n    # the same configuration, this constraint will not result in toolchain resolution failures.\n    exec_compatible_with = [\"@platforms//os:windows\", \"@platforms//cpu:x86_64\"],\n    target_settings = [\":version_or_prefix_version_setting\"],\n    toolchain_type = \"@bazel_tools//tools/jdk:bootstrap_runtime_toolchain_type\",\n    toolchain = \"@remotejdk21_win//:jdk\",\n)\n"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_java~7.1.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_java~7.1.0",
+            "remote_java_tools",
+            "rules_java~7.1.0~toolchains~remote_java_tools"
+          ]
+        ]
+      }
+    },
+    "@@rules_nodejs~6.0.3//nodejs:extensions.bzl%node": {
+      "general": {
+        "bzlTransitiveDigest": "eqSZz/NyLGaVPPEg+/9gv/EheVgW2R69KZ73JlD5GWE=",
+        "accumulatedFileDigests": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "nodejs_host": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs/private:nodejs_repo_host_os_alias.bzl",
+            "ruleClassName": "nodejs_repo_host_os_alias",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_host",
+              "user_node_repository_name": "nodejs"
+            }
+          },
+          "nodejs_linux_s390x": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_linux_s390x",
+              "platform": "linux_s390x",
+              "node_version": "16.14.2"
+            }
+          },
+          "nodejs_windows_amd64": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_windows_amd64",
+              "platform": "windows_amd64",
+              "node_version": "16.14.2"
+            }
+          },
+          "nodejs_toolchains": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs/private:toolchains_repo.bzl",
+            "ruleClassName": "toolchains_repo",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_toolchains",
+              "user_node_repository_name": "nodejs"
+            }
+          },
+          "nodejs_linux_amd64": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_linux_amd64",
+              "platform": "linux_amd64",
+              "node_version": "16.14.2"
+            }
+          },
+          "nodejs_linux_ppc64le": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_linux_ppc64le",
+              "platform": "linux_ppc64le",
+              "node_version": "16.14.2"
+            }
+          },
+          "nodejs_darwin_amd64": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_darwin_amd64",
+              "platform": "darwin_amd64",
+              "node_version": "16.14.2"
+            }
+          },
+          "nodejs_linux_arm64": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_linux_arm64",
+              "platform": "linux_arm64",
+              "node_version": "16.14.2"
+            }
+          },
+          "nodejs": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs/private:nodejs_repo_host_os_alias.bzl",
+            "ruleClassName": "nodejs_repo_host_os_alias",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs",
+              "user_node_repository_name": "nodejs"
+            }
+          },
+          "nodejs_darwin_arm64": {
+            "bzlFile": "@@rules_nodejs~6.0.3//nodejs:repositories.bzl",
+            "ruleClassName": "node_repositories",
+            "attributes": {
+              "name": "rules_nodejs~6.0.3~node~nodejs_darwin_arm64",
+              "platform": "darwin_arm64",
+              "node_version": "16.14.2"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_python~0.27.0//python/extensions:pip.bzl%pip": {
       "os:osx,arch:aarch64": {
-        "bzlTransitiveDigest": "SYJ9vW27BFrjF/GaFbIl5mQsqEDfBkZDDA+hD7e7f9M=",
+        "bzlTransitiveDigest": "mIRqrgCBPF/ygzb1QkGvdJQ6AMRJUfqcZJXaTgc6YVk=",
         "accumulatedFileDigests": {
           "@@//:requirements_lock.txt": "b86933e3f9856e2f71ab54fb40a7ac9e40fd2e996dd5beb187957d9e7f581b2b"
         },
@@ -2990,12 +7156,119 @@
               "environment": {}
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_globals",
+            "bazel_features~1.1.1~version_extension~bazel_features_globals"
+          ],
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_version",
+            "bazel_features~1.1.1~version_extension~bazel_features_version"
+          ],
+          [
+            "rules_python~0.27.0",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "rules_python~0.27.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__build",
+            "rules_python~0.27.0~internal_deps~pypi__build"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__click",
+            "rules_python~0.27.0~internal_deps~pypi__click"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__colorama",
+            "rules_python~0.27.0~internal_deps~pypi__colorama"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__importlib_metadata",
+            "rules_python~0.27.0~internal_deps~pypi__importlib_metadata"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__installer",
+            "rules_python~0.27.0~internal_deps~pypi__installer"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__more_itertools",
+            "rules_python~0.27.0~internal_deps~pypi__more_itertools"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__packaging",
+            "rules_python~0.27.0~internal_deps~pypi__packaging"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__pep517",
+            "rules_python~0.27.0~internal_deps~pypi__pep517"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__pip",
+            "rules_python~0.27.0~internal_deps~pypi__pip"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__pip_tools",
+            "rules_python~0.27.0~internal_deps~pypi__pip_tools"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__pyproject_hooks",
+            "rules_python~0.27.0~internal_deps~pypi__pyproject_hooks"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__setuptools",
+            "rules_python~0.27.0~internal_deps~pypi__setuptools"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__tomli",
+            "rules_python~0.27.0~internal_deps~pypi__tomli"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__wheel",
+            "rules_python~0.27.0~internal_deps~pypi__wheel"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pypi__zipp",
+            "rules_python~0.27.0~internal_deps~pypi__zipp"
+          ],
+          [
+            "rules_python~0.27.0",
+            "pythons_hub",
+            "rules_python~0.27.0~python~pythons_hub"
+          ],
+          [
+            "rules_python~0.27.0~python~pythons_hub",
+            "python_3_11_aarch64-apple-darwin",
+            "rules_python~0.27.0~python~python_3_11_aarch64-apple-darwin"
+          ]
+        ]
       }
     },
     "@@rules_python~0.27.0//python/extensions:python.bzl%python": {
       "general": {
-        "bzlTransitiveDigest": "sBUIrhzhZtq8rynvWnwm1dcZK05YfGluNUI/gOjLs2A=",
+        "bzlTransitiveDigest": "D8GlXPYKVucJ4rJudBSV8SknY8+MxXTmY8NlLbIkS7U=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -3256,12 +7529,19 @@
               "ignore_root_user_error": false
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_python~0.27.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@rules_python~0.27.0//python/private/bzlmod:internal_deps.bzl%internal_deps": {
       "general": {
-        "bzlTransitiveDigest": "xr7pKQvGhawsuA61pquXxuhuxlzM5QyWfF9UXfyr2Y4=",
+        "bzlTransitiveDigest": "8/HoRrt4Kr/lkiQu5uQtl4xnLy47KJQnZ92CuRmTPj4=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -3437,7 +7717,14 @@
               "build_file_content": "package(default_visibility = [\"//visibility:public\"])\n\nload(\"@rules_python//python:defs.bzl\", \"py_library\")\n\npy_library(\n    name = \"lib\",\n    srcs = glob([\"**/*.py\"]),\n    data = glob([\"**/*\"], exclude=[\n        # These entries include those put into user-installed dependencies by\n        # data_exclude in /python/pip_install/tools/bazel.py\n        # to avoid non-determinism following pip install's behavior.\n        \"**/*.py\",\n        \"**/*.pyc\",\n        \"**/*.pyc.*\",  # During pyc creation, temp files named *.pyc.NNN are created\n        \"**/* *\",\n        \"**/*.dist-info/RECORD\",\n        \"BUILD\",\n        \"WORKSPACE\",\n    ]),\n    # This makes this directory a top-level in the python import\n    # search path for anything that depends on this.\n    imports = [\".\"],\n)\n"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_python~0.27.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     }
   }

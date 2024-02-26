@@ -1,0 +1,8 @@
+{
+    "name": "ibazel_vite",
+    "private": true,
+    "devDependencies": {
+      "vite": "^5.1.4"
+    },
+    "dependencies": {}
+  }

@@ -1,0 +1,6 @@
+{
+    "name": "mycomponent",
+    "private": true,
+    "type": "module",
+    "main": "index.js"
+}

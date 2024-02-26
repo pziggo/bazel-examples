@@ -1,0 +1,6 @@
+{
+    "name": "@examples/mylib",
+    "private": true,
+    "type": "module",
+    "main": "index.js"
+}

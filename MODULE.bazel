@@ -20,3 +20,23 @@ pip.parse(
 use_repo(pip, "pip")
 
 bazel_dep(name = "rules_python_gazelle_plugin", version = "0.27.0")
+
+# Javascript toolchain
+
+bazel_dep(name = "aspect_rules_js", version = "1.38.0")
+
+bazel_dep(name = "rules_nodejs", version = "6.0.3")
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+node.toolchain(node_version = "16.14.2")
+
+npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
+
+npm.npm_translate_lock(
+    name = "npm",
+    pnpm_lock = "//:pnpm-lock.yaml",
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+
+use_repo(npm, "npm")
+
+bazel_dep(name = "aspect_rules_esbuild", version = "0.18.0")

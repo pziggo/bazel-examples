@@ -1,4 +1,5 @@
 load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
+load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//:def.bzl", "GAZELLE_PYTHON_RUNTIME_DEPS")
@@ -62,3 +63,5 @@ gazelle(
     data = GAZELLE_PYTHON_RUNTIME_DEPS,
     gazelle = ":gazelle_bin",
 )
+
+npm_link_all_packages()

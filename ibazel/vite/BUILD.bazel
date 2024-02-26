@@ -1,0 +1,23 @@
+load("@aspect_rules_js//js:defs.bzl", "js_run_devserver")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+
+npm_link_all_packages()
+
+js_run_devserver(
+    name = "dev",
+    args = [
+        package_name(),  # set root for vite to the actual package path (relative to execroot)
+        "-d",  # enable vite debug output for demonstration
+    ],
+    data = [
+        "index.html",
+        "package.json",
+        "//ibazel/vite/src/mycomponent",  # mycomponent and all of its dependencies
+    ],
+    tags = [
+        # `ibazel_notify_changes` is set explicitly already even though it might not be needed, see:
+        # https://github.com/aspect-build/rules_js/blob/c3f8904d8c5403c2032e3d1321793aafd2a581dd/js/private/js_run_devserver.bzl#L273
+        "ibazel_live_reload",
+    ],
+    tool = "//ibazel/vite/vite",
+)

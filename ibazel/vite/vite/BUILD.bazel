@@ -1,0 +1,7 @@
+load("@npm//ibazel/vite:vite/package_json.bzl", vite_bin = "bin")
+
+# Make vite available as js_binary target so it can be used for other rules.
+vite_bin.vite_binary(
+    name = "vite",
+    visibility = ["//ibazel/vite:__subpackages__"],
+)

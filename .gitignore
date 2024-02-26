@@ -1,2 +1,6 @@
 /bazel-*
 .bazelrc.user
+
+# NPM stuff
+node_modules
+.pnpm-store

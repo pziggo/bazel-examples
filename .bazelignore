@@ -1,0 +1,4 @@
+node_modules
+ibazel/vite/node_modules
+ibazel/vite/src/mycomponent/node_modules
+ibazel/vite/src/mylib/node_modules
